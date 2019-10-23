@@ -11,10 +11,12 @@ public class Library {
 
 	/** Create the constant BOOK variable in order to identify when readying a txt file */
 	private static final String BOOK = "book";
+	private static final String MEMBER = "member";
 	
 	
-	/** Creating an ArrayList in order to facilitate the manipulation of data */
+	/** Creating the ArrayList in order to facilitate the manipulation of data */
 	static ArrayList<Book> books = new ArrayList<>();
+	static ArrayList<Member> members = new ArrayList<>();
 	
 	/** Creating a method add in order to populate the array list from the main method*/
 	public static void add() {
@@ -26,24 +28,41 @@ public class Library {
 	public static void readingData() {
 		
 		/** Creating the necessary objects */
-		String fileName = "save.data";
-		ObjectInputStream fileIn;
+		String fileNameBook = "saveBook.data";
+		ObjectInputStream fileInBook;
 		Book aBook;
+		
+		String fileNameMember = "saveMember.data";
+		ObjectInputStream fileInMember;
+		Member aMember;
 		
 		/** Open try and catch error message, in order to find the possible errors */ 
 		try {
 			//Initiating the objects created outside of the try and catch
-			fileIn = new ObjectInputStream(new FileInputStream(fileName));
-			aBook = (Book) fileIn.readObject();
+			fileInBook = new ObjectInputStream(new FileInputStream(fileNameBook));
+			aBook = (Book) fileInBook.readObject();
 			
 			//Creating a while loop to populate the array list apart from the save.data file, until is not empty
 			while(aBook != null){
 				//create the add product for populate
 				books.add(aBook);
-				aBook = (Book) fileIn.readObject();
+				aBook = (Book) fileInBook.readObject();
 			}//closing while loop
 			
-			fileIn.close();
+			//Initiating the objects created outside of the try and catch
+			fileInMember = new ObjectInputStream(new FileInputStream(fileNameMember));
+			aMember = (Member) fileInMember.readObject();
+			
+			//Creating a while loop to populate the array list apart from the save.data file, until is not empty
+			while(aMember != null){
+				//create the add product for populate
+				members.add(aMember);
+				aMember = (Member) fileInMember.readObject();
+			}//closing while loop
+			
+			fileInBook.close();
+			fileInMember.close();
+			
 		}/** Create the catch fault for file not found, in order to give a opportunity to read a txt file */
 		catch (FileNotFoundException e){
 			System.err.println("Error: " + e.getMessage());
@@ -87,6 +106,11 @@ public class Library {
 					Book book = new Book(Integer.parseInt(split[1].trim()), split[2].trim(),split[3].trim(),split[4].trim());
 					books.add(book);
 					break;
+				case MEMBER:
+					Member member = new Member(split[1].trim(), split[2].trim(), split[3].trim(), split[4].trim(), 
+							Boolean.parseBoolean(split[5].trim()), split[6].trim(), split[7].trim(), split[8].trim());
+					members.add(member);
+					break;
 					default:
 						break;
 				}//closing switch statement
@@ -97,6 +121,15 @@ public class Library {
 		}//closing catch 
 	
 	}//closing reading Txt method
+
+	/** creating the main method */
+	public static void main(String[] args) {
+		
+		/** Initiating the system using the add method created */
+		Library.add();
+		
+	}//closing the main method
+	
 	
 	
 }//closing library class
