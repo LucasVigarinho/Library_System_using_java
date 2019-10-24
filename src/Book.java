@@ -5,13 +5,17 @@ public class Book {
 	private String bookTitle;
 	private String bookAutor;
 	private String bookCover;
+	private double price;
+	private String situation;
 	
 	/** Create a book constructor */
-	public Book(int bookId, String bookTitle, String bookAutor, String bookCover){
+	public Book(int bookId, String bookTitle, String bookAutor, String bookCover, double price, String situation){
 		this.bookId = bookId;
 		this.bookTitle = bookTitle;
 		this.bookAutor = bookAutor;
 		this.bookCover = bookCover;
+		this.price = price;
+		this.situation = situation;
 	}//closing book constructor
 
 	/** Create a getter getBookId, for getting bookId data */
@@ -38,6 +42,18 @@ public class Book {
 	public void setBookCover(String bookCover) {
 		this.bookCover = bookCover;
 	}//closing setBookCover
+	/** Create a getter getPrice for getting price */
+	public double getPrice() {
+		return price;
+	}//
+	/** Create a getter getSituation for getting situation of rent or lost */
+	public String getSituation() {
+		return situation;
+	}//
+	/** Create a setter setSituation for setting situation when it changes */
+	public void setSituation(String situation) {
+		this.situation = situation;
+	}//
 	
 	
 	

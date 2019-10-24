@@ -103,7 +103,8 @@ public class Library {
 				/** Create a switch statement in order to identify the right class/object to be used  */
 				switch (type) {
 				case BOOK:
-					Book book = new Book(Integer.parseInt(split[1].trim()), split[2].trim(),split[3].trim(),split[4].trim());
+					Book book = new Book(Integer.parseInt(split[1].trim()), split[2].trim(),split[3].trim(),split[4].trim(), 
+							Double.parseDouble(split[5].trim()),split[6].trim());
 					books.add(book);
 					break;
 				case MEMBER:
