@@ -15,10 +15,6 @@ public class Library {
 	private static final String BOOK = "book";
 	private static final String MEMBER = "member";
 
-
-
-	static ArrayList<Member> members = new ArrayList<>();
-
 	/** Creating a method add in order to populate the array list from the main method*/
 	public static void add() {
 		readingData();
@@ -28,7 +24,7 @@ public class Library {
 	/** Creating the reading Data Method */
 	@SuppressWarnings("static-access")
 	public static void readingData() {
-		BookCollection bookCollection = BookCollection.getBookCollection();
+		LibraryCollection bookCollection = LibraryCollection.getBookCollection();
 		/** Creating the necessary objects */
 		String fileNameBook = "saveBook.data";
 		ObjectInputStream fileInBook;
@@ -47,7 +43,7 @@ public class Library {
 			//Creating a while loop to populate the array list apart from the save.data file, until is not empty
 			while(aBook != null){
 				//create the add product for populate
-				bookCollection.bookCollection.add(aBook);
+				bookCollection.booksCollection.add(aBook);
 				aBook = (Book) fileInBook.readObject();
 			}//closing while loop
 
@@ -58,7 +54,7 @@ public class Library {
 			//Creating a while loop to populate the array list apart from the save.data file, until is not empty
 			while(aMember != null){
 				//create the add product for populate
-				members.add(aMember);
+				bookCollection.membersCollection.add(aMember);
 				aMember = (Member) fileInMember.readObject();
 			}//closing while loop
 
@@ -73,7 +69,7 @@ public class Library {
 		}/** Create the IO exception, in order to receive a message in case of the no data in the file*/
 		catch (IOException e){
 			/** open an if statement in order to test if the book array list is empty or not */
-			if(bookCollection.bookCollection.size() == 0) {
+			if(bookCollection.booksCollection.size() == 0) {
 				System.err.println("Error: " + e.getMessage());
 
 			}//closing if statement
@@ -107,12 +103,12 @@ public class Library {
 				case BOOK:
 					Book book = new Book(Integer.parseInt(split[1].trim()), split[2].trim(),split[3].trim(),split[4].trim(), 
 							Double.parseDouble(split[5].trim()),split[6].trim(), split[7].trim(),split[8].trim());
-					BookCollection.bookCollection.add(book);
+					LibraryCollection.booksCollection.add(book);
 					break;
 				case MEMBER:
 					Member member = new Member(split[1].trim(), split[2].trim(), split[3].trim(), split[4].trim(), 
 							Boolean.parseBoolean(split[5].trim()), split[6].trim(), split[7].trim(), split[8].trim());
-					members.add(member);
+					LibraryCollection.membersCollection.add(member);
 					break;
 				default:
 					break;
@@ -125,14 +121,12 @@ public class Library {
 
 	}//closing reading Txt method
 
-
-
 	/** creating the main method */
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 
 		/** Instantiating collections */
-		BookCollection bookCollection = BookCollection.getBookCollection();
+		LibraryCollection bookCollection = LibraryCollection.getBookCollection();
 
 		/** Initiating the system using the add method created */
 		Library.add();
@@ -163,8 +157,8 @@ public class Library {
 
 			//First case is the NEW BOOK
 			case(1):
-				Book newBook = new Book (((bookCollection.bookCollection.size()+1)), "xyw", "Lucas", "xys.png", 5000, "rented", "25/10/2019", "25/11/2019" );
-			BookCollection.bookCollection.add(newBook);
+				Book newBook = new Book (((bookCollection.booksCollection.size()+1)), "xyw", "Lucas", "xys.png", 5000, "rented", "25/10/2019", "25/11/2019" );
+			LibraryCollection.booksCollection.add(newBook);
 
 			break;
 			//Second case is the NEW MEMBER
@@ -180,16 +174,16 @@ public class Library {
 
 				/** Print out all the books */
 
-				for (int i = 0; i < (bookCollection.bookCollection.size()); i++) {
+				for (int i = 0; i < (bookCollection.booksCollection.size()); i++) {
 					System.out.println("\n\t" + 
-							"BookId - " + bookCollection.bookCollection.get(i).getBookId() + "\n" +
-							"BookTitle - " + bookCollection.bookCollection.get(i).getBookTitle() + "\n" +
-							"BookAutor - " + bookCollection.bookCollection.get(i).getBookAutor() + "\n" +
-							"BookCover - " + bookCollection.bookCollection.get(i).getBookCover() + "\n" +
-							"BookPrice - " + bookCollection.bookCollection.get(i).getPrice() + "\n" +
-							"BookSituation - " + bookCollection.bookCollection.get(i).getSituation() + "\n" +
-							"BookRentDate - " + bookCollection.bookCollection.get(i).getRentDate() + "\n" +
-							"BookRentReturn - " + bookCollection.bookCollection.get(i).getRentReturn() + "\n");
+							"BookId - " + bookCollection.booksCollection.get(i).getBookId() + "\n" +
+							"BookTitle - " + bookCollection.booksCollection.get(i).getBookTitle() + "\n" +
+							"BookAutor - " + bookCollection.booksCollection.get(i).getBookAutor() + "\n" +
+							"BookCover - " + bookCollection.booksCollection.get(i).getBookCover() + "\n" +
+							"BookPrice - " + bookCollection.booksCollection.get(i).getPrice() + "\n" +
+							"BookSituation - " + bookCollection.booksCollection.get(i).getSituation() + "\n" +
+							"BookRentDate - " + bookCollection.booksCollection.get(i).getRentDate() + "\n" +
+							"BookRentReturn - " + bookCollection.booksCollection.get(i).getRentReturn() + "\n");
 				}
 			break;
 			case(5):
