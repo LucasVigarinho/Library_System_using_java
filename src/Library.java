@@ -16,8 +16,7 @@ public class Library {
 	private static final String MEMBER = "member";
 
 
-	/** Creating the ArrayList in order to facilitate the manipulation of data */
-	static ArrayList<Book> books = new ArrayList<>();
+
 	static ArrayList<Member> members = new ArrayList<>();
 
 	/** Creating a method add in order to populate the array list from the main method*/
@@ -27,8 +26,9 @@ public class Library {
 	}//closing add method
 
 	/** Creating the reading Data Method */
+	@SuppressWarnings("static-access")
 	public static void readingData() {
-
+		BookCollection bookCollection = BookCollection.getBookCollection();
 		/** Creating the necessary objects */
 		String fileNameBook = "saveBook.data";
 		ObjectInputStream fileInBook;
@@ -47,7 +47,7 @@ public class Library {
 			//Creating a while loop to populate the array list apart from the save.data file, until is not empty
 			while(aBook != null){
 				//create the add product for populate
-				books.add(aBook);
+				bookCollection.bookCollection.add(aBook);
 				aBook = (Book) fileInBook.readObject();
 			}//closing while loop
 
@@ -73,7 +73,7 @@ public class Library {
 		}/** Create the IO exception, in order to receive a message in case of the no data in the file*/
 		catch (IOException e){
 			/** open an if statement in order to test if the book array list is empty or not */
-			if(books.size() == 0) {
+			if(bookCollection.bookCollection.size() == 0) {
 				System.err.println("Error: " + e.getMessage());
 
 			}//closing if statement
@@ -107,7 +107,7 @@ public class Library {
 				case BOOK:
 					Book book = new Book(Integer.parseInt(split[1].trim()), split[2].trim(),split[3].trim(),split[4].trim(), 
 							Double.parseDouble(split[5].trim()),split[6].trim(), split[7].trim(),split[8].trim());
-					books.add(book);
+					BookCollection.bookCollection.add(book);
 					break;
 				case MEMBER:
 					Member member = new Member(split[1].trim(), split[2].trim(), split[3].trim(), split[4].trim(), 
@@ -125,12 +125,18 @@ public class Library {
 
 	}//closing reading Txt method
 
+
+
 	/** creating the main method */
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
+
+		/** Instantiating collections */
+		BookCollection bookCollection = BookCollection.getBookCollection();
 
 		/** Initiating the system using the add method created */
 		Library.add();
-		
+
 		/** Creating the necessary variables and objects*/
 		Scanner input = new Scanner(System.in);
 		Scanner insert1 = new Scanner(System.in);
@@ -157,8 +163,10 @@ public class Library {
 
 			//First case is the NEW BOOK
 			case(1):
-				
-				break;
+				Book newBook = new Book (((bookCollection.bookCollection.size()+1)), "xyw", "Lucas", "xys.png", 5000, "rented", "25/10/2019", "25/11/2019" );
+			BookCollection.bookCollection.add(newBook);
+
+			break;
 			//Second case is the NEW MEMBER
 			case(2):
 				break;
@@ -167,16 +175,31 @@ public class Library {
 				break;
 			//Fourth case is the BOOK RECORD
 			case(4):
-				break;
-			//Fifth case is the GENERATE REPORT
+
+				//Fifth case is the GENERATE REPORT
+
+				/** Print out all the books */
+
+				for (int i = 0; i < (bookCollection.bookCollection.size()); i++) {
+					System.out.println("\n\t" + 
+							"BookId - " + bookCollection.bookCollection.get(i).getBookId() + "\n" +
+							"BookTitle - " + bookCollection.bookCollection.get(i).getBookTitle() + "\n" +
+							"BookAutor - " + bookCollection.bookCollection.get(i).getBookAutor() + "\n" +
+							"BookCover - " + bookCollection.bookCollection.get(i).getBookCover() + "\n" +
+							"BookPrice - " + bookCollection.bookCollection.get(i).getPrice() + "\n" +
+							"BookSituation - " + bookCollection.bookCollection.get(i).getSituation() + "\n" +
+							"BookRentDate - " + bookCollection.bookCollection.get(i).getRentDate() + "\n" +
+							"BookRentReturn - " + bookCollection.bookCollection.get(i).getRentReturn() + "\n");
+				}
+			break;
 			case(5):
 				break;
 			//Sixth case is the MANAGE ISSUE
 			case(6):
 				exit = true;
-				break;
+			break;
 			default:
-				
+
 			}//closing if statment
 		}while(exit == false);
 
