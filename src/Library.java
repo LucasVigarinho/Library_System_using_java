@@ -104,7 +104,7 @@ public class Library {
 				switch (type) {
 				case BOOK:
 					Book book = new Book(Integer.parseInt(split[1].trim()), split[2].trim(),split[3].trim(),split[4].trim(), 
-							Double.parseDouble(split[5].trim()),split[6].trim());
+							Double.parseDouble(split[5].trim()),split[6].trim(), split[7].trim(),split[8].trim());
 					books.add(book);
 					break;
 				case MEMBER:
@@ -128,6 +128,19 @@ public class Library {
 		
 		/** Initiating the system using the add method created */
 		Library.add();
+		
+		/** Creating the initial panel */
+		
+		System.out.println(" ");
+		System.out.println(" ======================================================");
+		System.out.println("                                                       ");
+		System.out.println("                      MSC - LIBRARY                    ");
+		System.out.println("                                                       ");
+		System.out.println(" ======================================================");
+		System.out.println("                                                       ");
+		/** Creating a do loop, in order to make possible the functions */
+		
+		
 		
 	}//closing the main method
 	
