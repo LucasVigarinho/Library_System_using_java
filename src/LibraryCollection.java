@@ -8,8 +8,8 @@ public class LibraryCollection {
 	/** Creating as well the final and unique instance,
 	 * and also the array list, in order to manipulate 
 	 * data collected from the external file */
-	static ArrayList<Book> booksCollection;
-	static ArrayList<Member> membersCollection;
+	public static ArrayList<Book> booksCollection;
+	public static ArrayList<Member> membersCollection;
 	/** Creating the constructor of the class */
 	private LibraryCollection() {
 		booksCollection = new ArrayList<Book>();
