@@ -9,7 +9,7 @@ public class LibraryCollection {
 	 * and also the array list, in order to manipulate 
 	 * data collected from the external file */
 	public static ArrayList<Book> booksCollection;
-	public static ArrayList<Member> membersCollection;
+	static ArrayList<Member> membersCollection;
 	/** Creating the constructor of the class */
 	private LibraryCollection() {
 		booksCollection = new ArrayList<Book>();

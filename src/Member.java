@@ -28,8 +28,8 @@ public class Member {
 		return memberId;
 	}//closing getMemberId
 	/** Create a setter for setting the member Id (as e-mail) or update */
-	public String setMemberId() {
-		return memberId;
+	public void setMemberId(String memberId) {
+		 this.memberId = memberId;
 	}//closing setMemberId
 	/** Create a getter for getting the member name */
 	public String getMemberName() {
